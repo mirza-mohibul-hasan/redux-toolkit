@@ -1,3 +1,5 @@
+const redux = require("redux");
+const { createStore } = redux;
 /* 
 Steps:
 1. state
@@ -43,3 +45,37 @@ const addUser = () => {
 //     payload: user,
 //   };
 // };
+
+/* 3. Reducer */
+// Reducer for Counter
+const countReducer = (state = initialCounterState, action) => {
+  switch (action.type) {
+    case INCREMENT:
+      return { ...state, count: state.count + 1 };
+    case DECREMENT:
+      return { ...state, count: state.count - 1 };
+    default:
+      state;
+  }
+};
+
+/* 4. Store
+     Methods:
+          ->getState()
+          ->dispatch()
+          ->subscribe()
+*/
+// Create Store
+const store = createStore(countReducer);
+store.subscribe(() => {
+  console.log(store.getState());
+});
+store.dispatch(incrementCounter());
+store.dispatch(incrementCounter());
+store.dispatch(incrementCounter());
+store.dispatch(incrementCounter());
+
+store.dispatch(decrementCounter());
+store.dispatch(decrementCounter());
+store.dispatch(decrementCounter());
+store.dispatch(decrementCounter());
